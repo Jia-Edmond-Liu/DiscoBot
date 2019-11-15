@@ -12,10 +12,9 @@ function getYoutube(url){
 	var xHttpRequest = new XMLHttpRequest();
     xHttpRequest.onreadystatechange = function() {
         if (xHttpRequest.readyState == 4 && xHttpRequest.status == 200)
-            callback(xHttpRequest.responseText);
 			console.log(xHttpRequest.responseText);
     }
-    xHttpRequest.open("GET", theUrl); // true for asynchronous
+    xHttpRequest.open("GET", url); // true for asynchronous
     xHttpRequest.send(null);
 }
 
