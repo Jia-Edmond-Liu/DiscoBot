@@ -11,10 +11,13 @@ This is a project that I will work on the side during my School and co-op for fu
 4. Using the command "-spongebob" followed by any  message will cause the bot to reply with the mocking spongebob meme-ified version
 4. Using the command "-youtube" followed by a keyword will return the url of the first video that is found on youtube when searching that keyword
 
-# Potential Future Functionality
+# TODO & Potential Future Functionality
 
 1. Implement Twitter API to access tweets
 2. Implement Youtube API to access youtube videos
+3. Further use the Youtube API so i can do more than fetch videos
+4. Implement Riot Games API for friends to access League of Legends
+5. Add more discord functionality so the bot can join voice channels
 
 # CURRENT LIST OF COMMANDS
 
