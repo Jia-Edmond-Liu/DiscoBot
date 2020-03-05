@@ -2,6 +2,7 @@
 //file is imported and kept seprately and will not be uploaded to github
 var auth = require('./json/tokens.json');
 var jokes = require('./json/jokes.json');
+var Dice = require('./classes/Dice.js');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const youtubeBase = "https://www.youtube.com/watch?v=";
 const Discord = require('discord.js');
@@ -11,7 +12,6 @@ const client = new Discord.Client();
 function getVideoURL(videoId){
 	return youtubeBase + videoId;
 }
-
 
 //Youtube get function
 function getYoutube(url){
@@ -43,6 +43,7 @@ function getYoutube(url){
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
+
 //ping pong method
 client.on('message', msg => {
   if (msg.content === 'ping') {
@@ -55,7 +56,7 @@ client.on('message', msg => {
 //Google API key and  a keyword and returns the first video
 //Link is in the format:
 //https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q="keyword here"&type=video&key="api key here"
-client.on('message', msg=>{
+client.on('message', msg => {
 	if(msg.content.substring(0,8).toUpperCase() == "-YOUTUBE"){
 		var substr = msg.content.substring(9,msg.content.length);
 		var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&" +
@@ -69,8 +70,7 @@ client.on('message', msg=>{
 //Spongebob capitalization meme generator
 //This method takes in an input string in the format of <-spongebob> "string"
 //and returns another string with randomized capitalization
-
-client.on('message', msg =>{
+client.on('message', msg => {
 	if(msg.content.substring(0,10).toUpperCase() == "-SPONGEBOB"){
 		var substr = msg.content.substring(11,msg.content.length);
 		var out = "";
@@ -87,8 +87,23 @@ client.on('message', msg =>{
 	}
 });
 
+//D&D Dice roller
+client.on('message', msg => {
+	if(msg.content.substring(0,5).toUpperCase() == "-ROLL"){
+		let substr = msg.content.substring(6,msg.content.length);
+		let split = substr.toUpperCase().split('D');
+		let out = "";
+		let roller = new Dice();
+		roller = roller.roll(Number(split[0]),Number(split[1]));
+		for(let i = 0; i < roller[0].length; i++){
+			out += " " + roller[0][i];
+		}
+		msg.channel.send("You rolled " + roller[1] + "(" + out + " )");
+	}
+});
+
 //Gets a random joke from jokes.json and prints it to channel
-client.on('message', msg =>{
+client.on('message', msg => {
 	if(msg.content.toUpperCase() == "-JOKE"){
 		var numJokes = Object.keys(jokes).length;
 		var joke = jokes[Math.floor(Math.random() * numJokes)].text;
@@ -97,12 +112,13 @@ client.on('message', msg =>{
 });
 
 // Bot method that replies with a reaction when "Good bot" is said
-client.on('message', msg =>{
+client.on('message', msg => {
 	if(msg.content.toUpperCase() === "GOOD BOT"){
 		msg.react('💯')
 		.then(console.log)
 		.catch(console.error);
 	}
 });
+
 
 client.login(auth.TOKEN);
