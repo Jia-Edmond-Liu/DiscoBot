@@ -10,9 +10,11 @@ This is a project that I will work on the side during my School and co-op for fu
 3. Using the command "-joke" will have the bot reply with a joke from src/jokes.json
 4. Using the command "-spongebob" followed by any  message will cause the bot to reply with the mocking spongebob meme-ified version
 4. Using the command "-youtube" followed by a keyword will return the url of the first video that is found on youtube when searching that keyword
+5. Using the command "-roll" followed by nDx where n is the amount of dice to roll, x is the number of sides and D is the character literal 'D' will randomly roll a x sided die n times and return the total sum of the rolls + each individual roll
 
 # TODO & Potential Future Functionality
 
+0. Move stuff to classes so that its not so messy
 1. Implement Twitter API to access tweets
 2. Implement Youtube API to access youtube videos
 3. Further use the Youtube API so i can do more than fetch videos
